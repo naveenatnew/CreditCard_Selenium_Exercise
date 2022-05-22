@@ -169,23 +169,23 @@ namespace CreditCards.UITests
             }
         }
 
-        [Fact]
-        [UseReporter(typeof(BeyondCompare4Reporter))]
-        public void RenderAboutPage()
-        {
-            using (IWebDriver driver = new ChromeDriver())
-            {
-                // We could also go and create a page object model for the About page
-                driver.Navigate().GoToUrl(AboutUrl);
+        //[Fact]
+        //[UseReporter(typeof(BeyondCompare4Reporter))]
+        //public void RenderAboutPage()
+        //{
+        //    using (IWebDriver driver = new ChromeDriver())
+        //    {
+        //        // We could also go and create a page object model for the About page
+        //        driver.Navigate().GoToUrl(AboutUrl);
 
-                ITakesScreenshot screenShotDriver = (ITakesScreenshot)driver;
-                Screenshot screenShot = screenShotDriver.GetScreenshot();
-                screenShot.SaveAsFile("aboutpage.bmp", ScreenshotImageFormat.Bmp);
+        //        ITakesScreenshot screenShotDriver = (ITakesScreenshot)driver;
+        //        Screenshot screenShot = screenShotDriver.GetScreenshot();
+        //        screenShot.SaveAsFile("aboutpage.bmp", ScreenshotImageFormat.Bmp);
 
-                FileInfo file = new FileInfo("aboutpage.bmp");
-                Approvals.Verify(file);
-            }
-        }
+        //        FileInfo file = new FileInfo("aboutpage.bmp");
+        //        Approvals.Verify(file);
+        //    }
+        //}
 
         public static IAlert IsAlertPresent(IWebDriver driver)
         {

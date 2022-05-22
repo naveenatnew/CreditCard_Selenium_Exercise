@@ -22,7 +22,7 @@ namespace CreditCards.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Demo application for Pluralsight course.";
+            ViewData["Message"] = "Demo Application";
 
             return View();
         }

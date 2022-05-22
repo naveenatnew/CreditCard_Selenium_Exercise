@@ -24,7 +24,7 @@ namespace CreditCards.UITests
 
                 DemoHelper.Pause();
 
-                Assert.Equal("https://www.pluralsight.com/", driver.Url);
+                Assert.Equal("https://www.selenium.dev/", driver.Url);
             }
         }
 
@@ -42,7 +42,7 @@ namespace CreditCards.UITests
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                 string linkText = (string)js.ExecuteScript(script);
 
-                Assert.Equal("Go to Pluralsight", linkText);
+                Assert.Equal("Go to Selenium", linkText);
             }
         }
     }

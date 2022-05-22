@@ -40,18 +40,18 @@ namespace CreditCards.UITests
             applicationPage.EnsurePageLoaded();
         }
 
-        [Fact]
-        public void BeInitiatedFromHomePage_CustomerService()
-        {
-            var homePage = new HomePage(ChromeDriverFixture.Driver);
-            homePage.NavigateTo();
+        //[Fact]
+        //public void BeInitiatedFromHomePage_CustomerService()
+        //{
+        //    var homePage = new HomePage(ChromeDriverFixture.Driver);
+        //    homePage.NavigateTo();
 
-            homePage.WaitForCustomerServiceCarouselPage();
+        //    homePage.WaitForCustomerServiceCarouselPage();
 
-            ApplicationPage applicationPage = homePage.ClickCustomerServiceApplicationLink();
+        //    ApplicationPage applicationPage = homePage.ClickCustomerServiceApplicationLink();
 
-            applicationPage.EnsurePageLoaded();
-        }
+        //    applicationPage.EnsurePageLoaded();
+        //}
 
         [Fact]
         public void BeInitiatedFromHomePage_RandomGreeting()
