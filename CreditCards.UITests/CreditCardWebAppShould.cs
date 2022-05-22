@@ -100,7 +100,9 @@ namespace CreditCards.UITests
                 homePage.ClickLiveChatFooterLink();
 
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-                IAlert alert = wait.Until(ExpectedConditions.AlertIsPresent());
+                //IAlert alert = wait.Until(ExpectedConditions.AlertIsPresent());
+
+                IAlert alert = wait.Until(x => IsAlertPresent(x));
 
                 Assert.Equal("Live chat is currently closed.", alert.Text);                
 
@@ -119,7 +121,9 @@ namespace CreditCards.UITests
                 homePage.ClickLearnAboutUsLink();
 
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-                IAlert alert = wait.Until(ExpectedConditions.AlertIsPresent());
+                //IAlert alert = wait.Until(ExpectedConditions.AlertIsPresent());
+                IAlert alert = wait.Until(x => IsAlertPresent(x));
+
                 alert.Accept();
 
                 Assert.EndsWith("/Home/About", driver.Url);
@@ -137,7 +141,8 @@ namespace CreditCards.UITests
                 homePage.ClickLearnAboutUsLink();
 
                 WebDriverWait wait = new WebDriverWait(driver, timeout: TimeSpan.FromSeconds(5));
-                IAlert alertBox = wait.Until(ExpectedConditions.AlertIsPresent());
+                //IAlert alertBox = wait.Until(ExpectedConditions.AlertIsPresent());
+                IAlert alertBox = wait.Until(x => IsAlertPresent(x));
                 alertBox.Dismiss();
 
                 homePage.EnsurePageLoaded();
@@ -179,6 +184,18 @@ namespace CreditCards.UITests
 
                 FileInfo file = new FileInfo("aboutpage.bmp");
                 Approvals.Verify(file);
+            }
+        }
+
+        public static IAlert IsAlertPresent(IWebDriver driver)
+        {
+            try
+            {
+                return driver.SwitchTo().Alert();
+            }
+            catch (NoAlertPresentException ex)
+            {
+                return null;
             }
         }
     }

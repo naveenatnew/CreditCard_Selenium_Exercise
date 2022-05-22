@@ -79,13 +79,17 @@ namespace CreditCards.UITests.PageObjectModels
         public void WaitForEasyApplicationCarouselPage()
         {
             WebDriverWait wait = new WebDriverWait(Driver, timeout: TimeSpan.FromSeconds(11));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.LinkText("Easy: Apply Now!")));
+            //wait.Until(ExpectedConditions.ElementToBeClickable(By.LinkText("Easy: Apply Now!")));
+
+            wait.Until(driver => driver.FindElement(By.LinkText("Easy: Apply Now!")).Enabled);
         }
 
         public void WaitForCustomerServiceCarouselPage()
         {
             WebDriverWait wait = new WebDriverWait(Driver, timeout: TimeSpan.FromSeconds(22));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.ClassName("customer-service-apply-now")));
+            //wait.Until(ExpectedConditions.ElementToBeClickable(By.ClassName("customer-service-apply-now")));
+
+            wait.Until(driver => driver.FindElement(By.ClassName("customer-service-apply-now")).Enabled);
         }        
     }
 }
