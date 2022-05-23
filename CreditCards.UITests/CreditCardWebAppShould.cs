@@ -1,13 +1,9 @@
 ﻿using System;
-using Xunit;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Support.UI;
-using ApprovalTests.Reporters;
-using ApprovalTests.Reporters.Windows;
-using System.IO;
-using ApprovalTests;
 using CreditCards.UITests.PageObjectModels;
 
 namespace CreditCards.UITests
@@ -16,8 +12,8 @@ namespace CreditCards.UITests
     {
         private const string AboutUrl = "http://localhost:44108/Home/About";
 
-        [Fact]
-        [Trait("Category", "Smoke")]
+        [Test]
+        [Category("Smoke")]
         public void LoadHomePage()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -27,8 +23,8 @@ namespace CreditCards.UITests
             }
         }
 
-        [Fact]
-        [Trait("Category", "Smoke")]
+        [Test]
+        [Category("Smoke")]
         public void ReloadHomePageOnBack()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -45,11 +41,11 @@ namespace CreditCards.UITests
 
                 string reloadedToken = homePage.GenerationToken;
 
-                Assert.NotEqual(initialToken, reloadedToken);
+                Assert.AreNotEqual(initialToken, reloadedToken);
             }
         }
 
-        [Fact]
+        [Test]
         public void DisplayProductsAndRates()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -59,18 +55,18 @@ namespace CreditCards.UITests
 
                 DemoHelper.Pause();
 
-                Assert.Equal("Easy Credit Card", homePage.Products[0].name);
-                Assert.Equal("20% APR", homePage.Products[0].interestRate);
+                Assert.AreEqual("Easy Credit Card", homePage.Products[0].name);
+                Assert.AreEqual("20% APR", homePage.Products[0].interestRate);
 
-                Assert.Equal("Silver Credit Card", homePage.Products[1].name);
-                Assert.Equal("18% APR", homePage.Products[1].interestRate);
+                Assert.AreEqual("Silver Credit Card", homePage.Products[1].name);
+                Assert.AreEqual("18% APR", homePage.Products[1].interestRate);
 
-                Assert.Equal("Gold Credit Card", homePage.Products[2].name);
-                Assert.Equal("17% APR", homePage.Products[2].interestRate);
+                Assert.AreEqual("Gold Credit Card", homePage.Products[2].name);
+                Assert.AreEqual("17% APR", homePage.Products[2].interestRate);
             }
         }
 
-        [Fact]
+        [Test]
         public void OpenContactFooterLinkInNewTab()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -85,11 +81,11 @@ namespace CreditCards.UITests
                 string contactTab = allTabs[1];
                 driver.SwitchTo().Window(contactTab);
 
-                Assert.EndsWith("/Home/Contact", driver.Url);
+                StringAssert.EndsWith("/Home/Contact", driver.Url);
             }
         }
 
-        [Fact]
+        [Test]
         public void AlertIfLiveChatClosed()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -104,13 +100,13 @@ namespace CreditCards.UITests
 
                 IAlert alert = wait.Until(x => IsAlertPresent(x));
 
-                Assert.Equal("Live chat is currently closed.", alert.Text);                
+                Assert.AreEqual("Live chat is currently closed.", alert.Text);                
 
                 alert.Accept();
             }
         }
 
-        [Fact]
+        [Test]
         public void NavigateToAboutUsWhenOkClicked()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -126,11 +122,11 @@ namespace CreditCards.UITests
 
                 alert.Accept();
 
-                Assert.EndsWith("/Home/About", driver.Url);
+                StringAssert.EndsWith("/Home/About", driver.Url);
             }
         }
 
-        [Fact]
+        [Test]
         public void NotNavigateToAboutUsWhenCancelClicked()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -149,7 +145,7 @@ namespace CreditCards.UITests
             }
         }
 
-        [Fact]
+        [Test]
         public void NotDisplayCookieUseMessage()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -160,16 +156,16 @@ namespace CreditCards.UITests
                 driver.Manage().Cookies.AddCookie(new Cookie("acceptedCookies", "true"));
                 driver.Navigate().Refresh();
 
-                Assert.False(homePage.IsCookieMessagePresent);
+                Assert.IsFalse(homePage.IsCookieMessagePresent);
 
                 driver.Manage().Cookies.DeleteCookieNamed("acceptedCookies");
                 driver.Navigate().Refresh();
 
-                Assert.True(homePage.IsCookieMessagePresent);
+                Assert.IsTrue(homePage.IsCookieMessagePresent);
             }
         }
 
-        //[Fact]
+        //[Test]
         //[UseReporter(typeof(BeyondCompare4Reporter))]
         //public void RenderAboutPage()
         //{
@@ -195,6 +191,7 @@ namespace CreditCards.UITests
             }
             catch (NoAlertPresentException ex)
             {
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }

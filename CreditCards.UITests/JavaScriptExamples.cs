@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using Xunit;
+using NUnit.Framework;
 
 namespace CreditCards.UITests
 {
     public class JavaScriptExamples
     {
 
-        [Fact]
+        [Test]
         public void ClickOverlayedLink()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -24,11 +24,11 @@ namespace CreditCards.UITests
 
                 DemoHelper.Pause();
 
-                Assert.Equal("https://www.selenium.dev/", driver.Url);
+                Assert.AreEqual("https://www.selenium.dev/", driver.Url);
             }
         }
 
-        [Fact]
+        [Test]
         public void GetOverlayedLinkText()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -42,7 +42,7 @@ namespace CreditCards.UITests
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                 string linkText = (string)js.ExecuteScript(script);
 
-                Assert.Equal("Go to Selenium", linkText);
+                Assert.AreEqual("Go to Selenium", linkText);
             }
         }
     }
