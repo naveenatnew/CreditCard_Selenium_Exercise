@@ -180,9 +180,9 @@ namespace CreditCards.UITests
 
         //        ITakesScreenshot screenShotDriver = (ITakesScreenshot)driver;
         //        Screenshot screenShot = screenShotDriver.GetScreenshot();
-        //        screenShot.SaveAsFile("aboutpage.bmp", ScreenshotImageFormat.Bmp);
+        //        screenShot.SaveAsFile("aboutpage.png", ScreenshotImageFormat.Png);
 
-        //        FileInfo file = new FileInfo("aboutpage.bmp");
+        //        FileInfo file = new FileInfo("aboutpage.png");
         //        Approvals.Verify(file);
         //    }
         //}
